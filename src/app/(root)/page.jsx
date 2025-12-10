@@ -1,5 +1,7 @@
-// import ProjectForm from '@/modules/home/components/project-form'
+"use client";
+import ProjectForm from '@/modules/home/components/project-form'
 // import ProjectList from '@/modules/home/components/project-list'
+
 
 import Image from 'next/image'
 import React from 'react'
@@ -25,7 +27,7 @@ const Page = () => {
             Create apps and websites by chatting with AI
           </p>
           <div className='max-w-3xl w-full'>
-            {/* <ProjectForm/> */}
+            <ProjectForm/>
           </div>
       {/* <ProjectList/> */}
         </section>
