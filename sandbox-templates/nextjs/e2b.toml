@@ -1,0 +1,17 @@
+# This is a config for E2B sandbox template.
+# You can use template ID (529we37auapfvhw67iew) or template name (v0-project-clone-nextjs-build-new) to create a sandbox:
+
+# Python SDK
+# from e2b import Sandbox, AsyncSandbox
+# sandbox = Sandbox.create("v0-project-clone-nextjs-build-new") # Sync sandbox
+# sandbox = await AsyncSandbox.create("v0-project-clone-nextjs-build-new") # Async sandbox
+
+# JS SDK
+# import { Sandbox } from 'e2b'
+# const sandbox = await Sandbox.create('v0-project-clone-nextjs-build-new')
+
+team_id = "2cd9806f-d82b-44b7-b010-1f0911ecc08b"
+start_cmd = "/compile_page.sh"
+dockerfile = "e2b.Dockerfile"
+template_name = "v0-project-clone-nextjs-build-new"
+template_id = "529we37auapfvhw67iew"
