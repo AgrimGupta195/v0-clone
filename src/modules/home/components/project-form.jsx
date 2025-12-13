@@ -11,6 +11,8 @@ import z from "zod";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
+import { useCreateProject } from "@/modules/projects/hooks/project";
+
 const formSchema = z.object({
   content: z
     .string()
@@ -72,7 +74,7 @@ const PROJECT_TEMPLATES = [
 const ProjectForm = () => {
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
-  
+  const { mutateAsync, isPending } = useCreateProject();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -88,7 +90,10 @@ const ProjectForm = () => {
 
   const onSubmit = async (values) => {
     try {
-    toast.success("Project created successfully!");
+      const res = await mutateAsync(values.content);
+      router.push(`/projects/${res.id}`);
+      toast.success("Project created successfully");
+      form.reset();
     } catch (error) {
       toast.error(error.message || "Failed to create project");
     }
@@ -128,7 +133,6 @@ const ProjectForm = () => {
           </span>
         </div>
       </div>
-
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -143,7 +147,7 @@ const ProjectForm = () => {
             render={({ field }) => (
               <TextAreaAutosize
                 {...field}
-                // disabled={isPending}
+                disabled={isPending}
                 placeholder="Describe what you want to create..."
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
@@ -174,7 +178,7 @@ const ProjectForm = () => {
                 "size-8 rounded-full",
                 isButtonDisabled && "bg-muted-foreground border"
               )}
-            //   disabled={isButtonDisabled}
+              disabled={isButtonDisabled}
               type="submit"
             >
               {isPending ? (
