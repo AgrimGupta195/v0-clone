@@ -33,7 +33,7 @@ export async function consumeCredits() {
   const usageTracker = await getUsageTracker();
   const result = await usageTracker.consume(userId, GENERATION_COST);
   
-  return result; // Make sure to return the result
+  return result; 
 }
 
 export async function getUsageStatus() {
