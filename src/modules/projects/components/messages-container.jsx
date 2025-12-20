@@ -18,6 +18,7 @@ const MessagesContainer = ({
   const queryClient = useQueryClient();
   const bottomRef = useRef(null);
   const lastAssistantMessageIdRef = useRef(null);
+
   useEffect(() => {
     if (projectId) {
       prefetchMessages(queryClient, projectId);

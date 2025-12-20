@@ -65,7 +65,7 @@ export const codeAgentFunction = inngest.createFunction(
       name: "code-agent",
       description: "An expert coding agent",
       system: PROMPT,
-      model: gemini({ model: "gemini-2.5-flash" }),
+      model: gemini({ model: "gemini-2.5-pro" }),
       tools: [
         createTool({
           name: "terminal",
@@ -112,6 +112,43 @@ export const codeAgentFunction = inngest.createFunction(
             ),
           }),
           handler: async ({ files }, { step, network }) => {
+            const newFiles = await step?.run(
+              "createOrUpdateFiles",
+              async () => {
+                try {
+                  const updatedFiles = network?.state?.data.files || {};
+                  const sandbox = await Sandbox.connect(sandboxId);
+                  for (const file of files) {
+                    await sandbox.files.write(file.path, file.content);
+                    updatedFiles[file.path] = file.content;
+                  }
+                  return updatedFiles;
+                } catch (error) {
+                  return "Error" + error;
+                }
+              }
+            );
+
+            if (typeof newFiles === "object") {
+              network.state.data.files = newFiles;
+            }
+          },
+        }),
+
+        // Alias for models that mistakenly call the tool name with a hyphen
+        createTool({
+          name: "createOr-UpdateFiles",
+          description: "Alias: Create or update files in the sandbox (hyphen variant)",
+          parameters: z.object({
+            files: z.array(
+              z.object({
+                path: z.string(),
+                content: z.string(),
+              })
+            ),
+          }),
+          handler: async ({ files }, { step, network }) => {
+            // Reuse the same step name to keep state updates consistent
             const newFiles = await step?.run(
               "createOrUpdateFiles",
               async () => {
@@ -198,14 +235,14 @@ export const codeAgentFunction = inngest.createFunction(
       name: "fragment-title-generator",
       description: "Generate a title for the fragment",
       system: FRAGMENT_TITLE_PROMPT,
-      model: gemini({ model: "gemini-2.5-flash" }),
+      model: gemini({ model: "gemini-2.5-pro" }),
     });
 
     const responseGenerator = createAgent({
       name: "response-generator",
       description: "Generate a response for the fragment",
       system: RESPONSE_PROMPT,
-      model: gemini({ model: "gemini-2.5-flash" }),
+      model: gemini({ model: "gemini-2.5-pro" }),
     });
 
     const { output: fragmentTitleOutput } = await fragmentTitleGenerator.run(
@@ -281,10 +318,7 @@ export const codeAgentFunction = inngest.createFunction(
 
     return {
       url: sandboxUrl,
-      title:
-        fragmentTitle[0].type === "text"
-          ? fragmentTitle[0].content
-          : "Fragment",
+      title: generateFragmentTitle(),
       files: result.state.data.files,
       summary: result.state.data.summary,
     };
