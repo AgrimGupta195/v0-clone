@@ -47,6 +47,7 @@ const ProjectList = () => {
     <div className="w-full mt-16">
       <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">Your Projects</h2>
       
+      {/* Desktop Grid View */}
       <div className="hidden lg:grid grid-cols-3 gap-4 max-w-6xl mx-auto">
         {projects.map((project) => (
             <Link href={`/projects/${project.id}`} key={project.id}>

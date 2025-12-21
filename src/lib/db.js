@@ -7,13 +7,19 @@ const adapter = new PrismaPg({
 });
 
 const globalAny = globalThis;
-const db = globalAny.__db || new PrismaClient({
-  adapter,
-  log: process.env.NODE_ENV === 'development' ? ['query', 'info', 'warn', 'error'] : ['error'],
-});
+
+const db =
+  globalAny.__db ||
+  new PrismaClient({
+    adapter,
+    log:
+      process.env.NODE_ENV === 'development'
+        ? ['query', 'info', 'warn', 'error']
+        : ['error'],
+  });
 
 if (process.env.NODE_ENV !== 'production') {
   globalAny.__db = db;
 }
 
-export default db; 
+export default db;

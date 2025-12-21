@@ -103,6 +103,7 @@ const ProjectForm = () => {
 
   return (
     <div className="space-y-8">
+      {/* Templates Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {PROJECT_TEMPLATES.map((template, index) => (
           <button
@@ -123,6 +124,8 @@ const ProjectForm = () => {
           </button>
         ))}
       </div>
+
+      {/* Divider */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
@@ -133,6 +136,8 @@ const ProjectForm = () => {
           </span>
         </div>
       </div>
+
+      {/* Form */}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

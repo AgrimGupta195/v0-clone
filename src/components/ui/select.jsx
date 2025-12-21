@@ -51,7 +51,6 @@ function SelectContent({
   className,
   children,
   position = "popper",
-  align = "center",
   ...props
 }) {
   return (
@@ -65,7 +64,6 @@ function SelectContent({
           className
         )}
         position={position}
-        align={align}
         {...props}>
         <SelectScrollUpButton />
         <SelectPrimitive.Viewport

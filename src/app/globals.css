@@ -175,6 +175,12 @@ body {
   letter-spacing: var(--tracking-normal);
 }
 
+@layer base{
+  button:not([disabled]){
+    cursor:pointer;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

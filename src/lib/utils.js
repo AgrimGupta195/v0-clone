@@ -5,41 +5,71 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-// Convert an object of filePath -> content into a nested tree array
-// suitable for `TreeView`. Directories are represented as arrays
-// [name, ...children], files are plain string names.
-export function convertFilesToTreeItems(files = {}) {
-  const root = {};
+/**
+ * Convert a record of files to a tree structure.
+ * @param files - Record of file paths to content
+ * @returns Tree structure for TreeView component
+ *
+ * @example
+ * Input: { "src/Button.tsx": "...", "README.md": "..." }
+ * Output: [["src", "Button.tsx"], "README.md"]
+ */
+export function convertFilesToTreeItems(
+  files
+) {
+  
 
-  Object.keys(files).forEach((path) => {
-    const parts = path.split("/");
-    let node = root;
-    parts.forEach((part, idx) => {
-      if (!node[part]) {
-        node[part] = { __children: {} };
-      }
-      if (idx === parts.length - 1) {
-        // mark as file
-        node[part].__isFile = true;
-      }
-      node = node[part].__children;
-    });
-  });
+  // Build a tree structure first
+  const tree = {};
+  // Sort files to ensure consistent ordering
+  const sortedPaths = Object.keys(files).sort();
 
-  const build = (node) => {
-    return Object.keys(node)
-      .sort()
-      .map((key) => {
-        const entry = node[key];
-        const children = entry.__children || {};
-        const childKeys = Object.keys(children);
-        if (childKeys.length === 0 && entry.__isFile) {
-          return key;
+  for (const filePath of sortedPaths) {
+    const parts = filePath.split("/");
+    let current = tree;
+
+    // Navigate/create the tree structure
+    for (let i = 0; i < parts.length - 1; i++) {
+      const part = parts[i];
+      if (!current[part]) {
+        current[part] = {};
+      }
+      current = current[part];
+    }
+
+    // Add the file (leaf node)
+    const fileName = parts[parts.length - 1];
+    current[fileName] = null; // null indicates it's a file
+  }
+
+  // Convert tree structure to TreeItem format
+  function convertNode(node, name) {
+    const entries = Object.entries(node);
+
+    if (entries.length === 0) {
+      return name || "";
+    }
+
+    const children = [];
+
+    for (const [key, value] of entries) {
+      if (value === null) {
+        // It's a file
+        children.push(key);
+      } else {
+        // It's a folder
+        const subTree = convertNode(value, key);
+        if (Array.isArray(subTree)) {
+          children.push([key, ...subTree]);
+        } else {
+          children.push([key, subTree]);
         }
-        // folder: include files and nested folders
-        return [key, ...build(children)];
-      });
-  };
+      }
+    }
 
-  return build(root);
+    return children;
+  }
+
+  const result = convertNode(tree);
+  return Array.isArray(result) ? result : [result];
 }
