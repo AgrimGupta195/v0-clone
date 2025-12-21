@@ -70,13 +70,9 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-<<<<<<< HEAD
-    "@tailwindcss/postcss": "^4",
-    "@types/react": "19.1.15",
-=======
     "@tailwindcss/postcss": "^4.1.18",
+    "@types/react": "19.1.15",
     "dotenv": "^17.2.3",
->>>>>>> 93ab1247c2920a909a300537354870fe49851e72
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
     "tailwindcss": "^4",
