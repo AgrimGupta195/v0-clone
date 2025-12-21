@@ -1,12 +1,17 @@
+import db from '@/lib/db';
+import { getMessages } from '@/modules/messages/actions';
+import { getProjectById } from '@/modules/projects/actions';
 import ProjectView from '@/modules/projects/components/project-view';
-import React from 'react';
+import React, { Suspense } from 'react'
 
-export const runtime = "nodejs";
+const Page = async({params}) => {
+    const {projectId} = await params;
 
-const Page = async ({ params }) => {
-  const { projectId } = params;
 
-  return <ProjectView projectId={projectId} />;
-};
+  return (
+      <ProjectView projectId={projectId} />
+ 
+  )
+}
 
-export default Page;
+export default Page

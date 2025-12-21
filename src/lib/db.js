@@ -1,5 +1,3 @@
-// src/lib/db.js
-import "server-only";
 
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
