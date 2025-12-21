@@ -1,5 +1,5 @@
 import { onBoardUser } from "@/modules/auth/actions";
-import { Navbar } from "@/modules/home/components/navbar";
+import { Navbar } from "@/modules/home/components/Navbar";
 
 import React from "react";
 
