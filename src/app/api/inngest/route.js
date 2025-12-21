@@ -1,8 +1,18 @@
-import { serve } from "inngest/next";
-import { inngest } from "../../../inngest/client";
-import { codeAgentFunction } from "../../../inngest/functions";
+import "server-only";
 
-export const { GET, POST, PUT } = serve({
-  client: inngest,
-  functions: [codeAgentFunction],
-});
+export const runtime = "nodejs";
+
+async function handler(req) {
+  const { serve } = await import("inngest/next");
+  const { inngest } = await import("../../../inngest/client");
+  const { codeAgentFunction } = await import("../../../inngest/functions");
+
+  return serve({
+    client: inngest,
+    functions: [codeAgentFunction],
+  })(req);
+}
+
+export const GET = handler;
+export const POST = handler;
+export const PUT = handler;
