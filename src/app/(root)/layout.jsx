@@ -3,6 +3,8 @@ import { Navbar } from "@/modules/home/components/Navbar";
 
 import React from "react";
 
+export const dynamic = 'force-dynamic';
+
 const RootLayout = async({ children }) => {
   await onBoardUser();
   return (
