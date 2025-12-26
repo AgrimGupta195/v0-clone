@@ -2,6 +2,7 @@
   "name": "v0",
   "version": "0.1.0",
   "private": true,
+  "description": "V0 Clone - Next.js application",
   "scripts": {
     "dev": "docker compose up -d && next dev --turbopack",
     "build": "prisma generate && prisma migrate deploy && next build",
