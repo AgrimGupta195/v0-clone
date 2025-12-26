@@ -4,6 +4,8 @@ import ProjectList from '@/modules/home/components/project-list'
 import Image from 'next/image'
 import React from 'react'
 
+export const dynamic = 'force-dynamic';
+
 const Page = () => {
   return (
     <div className='flex items-center justify-center w-full px-4 py-8'>
