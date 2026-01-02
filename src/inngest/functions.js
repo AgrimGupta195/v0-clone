@@ -324,3 +324,14 @@ export const codeAgentFunction = inngest.createFunction(
     };
   }
 );
+
+// Lightweight health check function for verifying webhook routing and signing.
+export const healthCheckFunction = inngest.createFunction(
+  { id: "health-check" },
+
+  { event: "health/check" },
+
+  async ({ event }) => {
+    return { ok: true, ts: Date.now(), received: event?.id || null };
+  }
+);

@@ -2,7 +2,7 @@
 
 import { MessageRole, MessageType } from "@prisma/client";
 import db from "../../../lib/db";
-import { inngest } from "../../../inngest/client";
+import { inngest } from "../../../inngest";
 import { getCurrentUser } from "@/modules/auth/actions";
 import { consumeCredits } from "@/lib/usage";
 

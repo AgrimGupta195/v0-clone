@@ -1,7 +1,11 @@
-import { Inngest } from "inngest";
+import { EventSchemas, Inngest } from "inngest";
 
-export const inngest = new Inngest({ 
+// Create a client to send and receive events
+export const inngest = new Inngest({
   id: "v0-clone",
-  // Add your Inngest signing key from environment variables if using Inngest Cloud
-  signingKey: process.env.INNGEST_SIGNING_KEY,
+  eventKey: process.env.INNGEST_EVENT_KEY,
+  signingKey:
+    process.env.NODE_ENV === "development"
+      ? false
+      : process.env.INNGEST_SIGNING_KEY,
 });
