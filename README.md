@@ -57,25 +57,9 @@ This project is a Next.js application designed to provide a robust and scalable 
 - **Utilities**: ESLint, Prettier
 - **Development Tools**: Docker, Vercel, E2B Sandbox
 
-## Application Flowchart
+## Application Flow
 
-Below is a simplified flowchart that illustrates how the application works:
-
-```mermaid
-graph TD
-    A[User Accesses Application] --> B[Frontend (Next.js)]
-    B --> C[Server-Side Rendering or Static Generation]
-    B --> D[API Routes for Backend Logic]
-    D --> E[Database Operations via Prisma]
-    D --> F[Event Handling via Inngest]
-    E --> G[PostgreSQL Database]
-    F --> H[Background Tasks and Workflows]
-    G --> I[Data Returned to API]
-    I --> J[Frontend Updates UI]
-    H --> J
-```
-
-### Explanation of the Flow
+Below is a simplified explanation of how the application works:
 
 1. **User Accesses Application**: The user interacts with the application through the browser.
 2. **Frontend (Next.js)**: The frontend is built using Next.js, which handles routing, rendering, and user interface components.
