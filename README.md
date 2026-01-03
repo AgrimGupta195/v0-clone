@@ -5,8 +5,7 @@ This project is a Next.js application designed to provide a robust and scalable 
 ## How It Works
 
 ### Frontend
-- **Next.js**: The core framework used for building the frontend. It provides server-side rendering (SSR) and static site generation (SSG) capabilities, ensuring fast and SEO-friendly pages.
-- **React**: Used for building reusable UI components and managing the user interface.
+- **Next.js**: The core framework used for building the frontend. It provides server-side rendering (SSR) and static site generation (SSG) capabilities, ensuring fast and SEO-friendly pages.Used for building reusable UI components and managing the user interface.
 - **Tailwind CSS**: A utility-first CSS framework for styling the application, enabling rapid UI development with a consistent design system.
 
 ### Backend
@@ -18,7 +17,7 @@ This project is a Next.js application designed to provide a robust and scalable 
 - **PostgreSQL**: The primary database used for storing application data. It is managed via Prisma, ensuring efficient and reliable data operations.
 
 ### Authentication
-- **NextAuth.js**: Handles user authentication and session management. It supports multiple providers and ensures secure access to the application.
+- **Clerk**: Handles user authentication and session management. It provides a seamless and secure authentication experience with support for multiple providers and pre-built UI components.
 
 ### State Management
 - **React Context API**: Used for managing global state across the application, such as user authentication status and theme preferences.
@@ -53,7 +52,7 @@ This project is a Next.js application designed to provide a robust and scalable 
 - **Styling**: Tailwind CSS, PostCSS
 - **Backend**: API Routes, Inngest
 - **Database**: PostgreSQL, Prisma
-- **Authentication**: NextAuth.js
+- **Authentication**: Clerk
 - **State Management**: React Context API
 - **Utilities**: ESLint, Prettier
 - **Development Tools**: Docker, Vercel, E2B Sandbox
